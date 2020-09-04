@@ -192,9 +192,34 @@ void keyboard(unsigned char key, int x, int y)
     case 'n':
         stop=0;
         py=0;
-        stride1=0.001;
-        stride2=0.002;
-        stride3=0.0025;
+        stride1=0.002;
+        stride2=0.0025;
+        stride3=0.0029;
+
+
+            tx=0;
+            btx=0;
+            ty=0;
+            px=-3;
+            py=0;
+            qy=0;
+            ry=0;
+            cx=-1;
+            ax=1;
+            //by=0;
+            timer1=0;
+            timer2=0;
+            timer3=0;
+            flag1=0;
+            flag2=0;
+            flag3=0;
+            hit_flag_1=0;
+            hit_flag_2=0;
+            hit_flag_3=0;
+            bulletFlag=0;
+            hit_flag_4=0;
+            alienship_x=-4;
+            alienship_y=3;
         break;
     }
 }
@@ -966,7 +991,7 @@ void myDisplay()
     AlienShip(0.6,0.2);
     }
 
-  if (py<=-6){
+  if (py<=-6 || ry<=-6 ||qy<=-6){
        drawText("GAME OVER:", -1,2);
        alienship_y=7;
        hit_flag_1=1;
@@ -1029,7 +1054,7 @@ void myDisplay()
     float Alien_y_3=(bodyy1_1+ry+bodyy2_1+ry+bodyy3_1+ry+bodyy4_1+ry)/4;
 
     float bull_x=(bullet_x1+btx+bullet_x2+btx+bullet_x3+btx+bullet_x4+btx)/4;
-    float bull_y=(bullet_y1+by+bullet_y2+by+bullet_y3+by+bullet_y4+by)/4;
+    float bull_y=(bullet_y4+by);
 
     //float bull_x=(bullet_x1+btx+bullet_x2+btx+bullet_x3+btx+bullet_x4+btx)/4;
     //float bull_y=(bullet_y1+by+bullet_y2+by+bullet_y3+by+bullet_y4+by)/4;
@@ -1037,8 +1062,11 @@ void myDisplay()
 
 
 
-    if(abs(alienship_y-bull_y)<=0.1 && hit_flag_4==0 && (bull_x+btx)>=(-0.3+alienship_x) && (bull_x+btx)<=(0.3+alienship_x)){
+    if(abs(alienship_y-bull_y)<=0.2 && hit_flag_4==0 && (bullet_x1+btx)>=(-0.3+alienship_x) && (bullet_x4+btx)<=(0.3+alienship_x)){
 
+            stride1=0.001;
+            stride2=0.0015;
+            stride3=0.0019;
             score+=5;
             hit_flag_4=1;
            // cout<<score;
@@ -1051,7 +1079,7 @@ void myDisplay()
     }
 
 
-    if(abs(Alien_y_1-bull_y)<=0.1 && hit_flag_1==0 && (bull_x+btx)>=(left_hand_x_1+px) && (bull_x+btx)<=(right_hand_x_1+px)){
+    if(abs(Alien_y_1-bull_y)<=0.2 && hit_flag_1==0 && (bullet_x1+btx)>=(left_hand_x_1+px) && (bullet_x4+btx)<=(right_hand_x_1+px)){
 
             score+=1;
             hit_flag_1=1;
@@ -1062,7 +1090,7 @@ void myDisplay()
 
 
     }
-    if(abs(Alien_y_2-bull_y)<=0.1 && hit_flag_2==0 &&(bull_x+btx)>=(left_hand_x_1+cx) && (bull_x+btx)<=(right_hand_x_1+cx)){
+    if(abs(Alien_y_2-bull_y)<=0.2&& hit_flag_2==0 &&(bullet_x1+btx)>=(left_hand_x_1+cx) && (bullet_x4+btx)<=(right_hand_x_1+cx)){
 
             score+=1;
             hit_flag_2=1;
@@ -1073,7 +1101,7 @@ void myDisplay()
 
     }
 
-   if(abs(Alien_y_3-bull_y)<=0.1 && hit_flag_3==0 && (bull_x+btx)>=(left_hand_x_1+ax) && (bull_x+btx)<=(right_hand_x_1+ax)){
+   if(abs(Alien_y_3-bull_y)<=0.2 && hit_flag_3==0 && (bullet_x1+btx)>=(left_hand_x_1+ax) && (bullet_x4+btx)<=(right_hand_x_1+ax)){
 
             score+=1;
             hit_flag_3=1;
